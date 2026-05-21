@@ -129,7 +129,8 @@ button#calc-btn:hover {
 /* ---- Summary ---- */
 
 #summary,
-#mode2-summary {
+#mode2-summary,
+#mode3-summary {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
@@ -144,6 +145,25 @@ button#calc-btn:hover {
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
+}
+
+/* ---- Mode 3 reference box ---- */
+
+.ref-label {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+#mode3-ref {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: #fffbee;
+  border: 1px solid #e2d580;
+  border-radius: 4px;
 }
 
 .summary-label {
@@ -165,7 +185,8 @@ button#calc-btn:hover {
 /* ---- Table ---- */
 
 #result-table,
-#mode2-result-table {
+#mode2-result-table,
+#mode3-result-table {
   border-collapse: collapse;
   width: 100%;
   font-size: 0.925rem;
@@ -174,32 +195,38 @@ button#calc-btn:hover {
 #result-table th,
 #result-table td,
 #mode2-result-table th,
-#mode2-result-table td {
+#mode2-result-table td,
+#mode3-result-table th,
+#mode3-result-table td {
   border: 1px solid #ddd;
   padding: 0.45rem 0.75rem;
   text-align: right;
 }
 
 #result-table th,
-#mode2-result-table th {
+#mode2-result-table th,
+#mode3-result-table th {
   background: #f4f4f4;
   font-weight: 600;
   text-align: center;
 }
 
 #result-table td:first-child,
-#mode2-result-table td:first-child {
+#mode2-result-table td:first-child,
+#mode3-result-table td:first-child {
   text-align: left;
 }
 
 #result-table td:nth-child(2),
-#mode2-result-table td:nth-child(2) {
+#mode2-result-table td:nth-child(2),
+#mode3-result-table td:nth-child(2) {
   text-align: center;
   color: #888;
   width: 3rem;
 }
 
 #result-table tbody tr:hover,
-#mode2-result-table tbody tr:hover {
+#mode2-result-table tbody tr:hover,
+#mode3-result-table tbody tr:hover {
   background: #f9f9f9;
 }

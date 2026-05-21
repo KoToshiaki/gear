@@ -1,11 +1,12 @@
-import { calcGearPair, calcGearPairMode2 } from './calc.js';
+import { calcGearPair, calcGearPairMode2, calcGearPairMode3 } from './calc.js';
 
 // ---- DOM references ----
 
-const errorSection      = document.getElementById('error-section');
-const errorList         = document.getElementById('error-list');
-const resultSection     = document.getElementById('result-section');
+const errorSection       = document.getElementById('error-section');
+const errorList          = document.getElementById('error-list');
+const resultSection      = document.getElementById('result-section');
 const mode2ResultSection = document.getElementById('mode2-result-section');
+const mode3ResultSection = document.getElementById('mode3-result-section');
 
 // ---- Utilities ----
 
@@ -26,6 +27,7 @@ function setText(id, value) {
 const modeTabs   = document.querySelectorAll('.mode-tab');
 const mode1Panel = document.getElementById('mode1-panel');
 const mode2Panel = document.getElementById('mode2-panel');
+const mode3Panel = document.getElementById('mode3-panel');
 
 modeTabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -35,10 +37,12 @@ modeTabs.forEach(tab => {
     const mode = tab.dataset.mode;
     mode1Panel.hidden = (mode !== '1');
     mode2Panel.hidden = (mode !== '2');
+    mode3Panel.hidden = (mode !== '3');
 
-    errorSection.hidden      = true;
-    resultSection.hidden     = true;
+    errorSection.hidden       = true;
+    resultSection.hidden      = true;
     mode2ResultSection.hidden = true;
+    mode3ResultSection.hidden = true;
   });
 });
 
@@ -47,6 +51,7 @@ modeTabs.forEach(tab => {
 function showErrors(errors) {
   resultSection.hidden      = true;
   mode2ResultSection.hidden = true;
+  mode3ResultSection.hidden = true;
   errorList.innerHTML = errors.map(msg => `<li>${msg}</li>`).join('');
   errorSection.hidden = false;
 }
@@ -56,6 +61,7 @@ function showErrors(errors) {
 function showMode1Result(r) {
   errorSection.hidden       = true;
   mode2ResultSection.hidden = true;
+  mode3ResultSection.hidden = true;
 
   setText('result-i', fmt(r.i, 4));
   setText('result-a', fmt(r.a, 3));
@@ -87,11 +93,12 @@ document.getElementById('calc-btn').addEventListener('click', () => {
 // ---- Mode 2 ----
 
 function showMode2Result(r) {
-  errorSection.hidden  = true;
-  resultSection.hidden = true;
+  errorSection.hidden       = true;
+  resultSection.hidden      = true;
+  mode3ResultSection.hidden = true;
 
-  setText('r2-idealZ2',    r.idealZ2.toFixed(4));
-  setText('r2-z2',         r.z2);
+  setText('r2-idealZ2',     r.idealZ2.toFixed(4));
+  setText('r2-z2',          r.z2);
   setText('r2-targetRatio', fmt(r.targetRatio, 4));
   setText('r2-actualRatio', fmt(r.actualRatio, 4));
   setText('r2-ratioError',  fmtSigned(r.ratioError, 4));
@@ -119,4 +126,44 @@ document.getElementById('calc-btn-2').addEventListener('click', () => {
 
   const result = calcGearPairMode2(m, z1, i);
   result.ok ? showMode2Result(result) : showErrors(result.errors);
+});
+
+// ---- Mode 3 ----
+
+function showMode3Result(r) {
+  errorSection.hidden       = true;
+  resultSection.hidden      = true;
+  mode2ResultSection.hidden = true;
+
+  setText('r3-m',  fmt(r.m, 4));
+  setText('r3-i',  fmt(r.i, 4));
+  setText('r3-a',  fmt(r.a, 3));
+  setText('r3-p',  fmt(r.p, 3));
+
+  setText('r3-nearestMod', fmt(r.nearestModule,          4));
+  setText('r3-modErr',     fmtSigned(r.moduleError,      4));
+  setText('r3-stdCentre',  fmt(r.standardCentreDistance, 3));
+  setText('r3-centreErr',  fmtSigned(r.centreDistanceError, 3));
+
+  setText('r3-z1-row', r.gear1.z);
+  setText('r3-z2-row', r.gear2.z);
+  setText('r3-d1',     fmt(r.gear1.d,  3));
+  setText('r3-d2',     fmt(r.gear2.d,  3));
+  setText('r3-da1',    fmt(r.gear1.da, 3));
+  setText('r3-da2',    fmt(r.gear2.da, 3));
+  setText('r3-df1',    fmt(r.gear1.df, 3));
+  setText('r3-df2',    fmt(r.gear2.df, 3));
+  setText('r3-db1',    fmt(r.gear1.db, 3));
+  setText('r3-db2',    fmt(r.gear2.db, 3));
+
+  mode3ResultSection.hidden = false;
+}
+
+document.getElementById('calc-btn-3').addEventListener('click', () => {
+  const a  = document.getElementById('m3-a').value;
+  const z1 = document.getElementById('m3-z1').value;
+  const z2 = document.getElementById('m3-z2').value;
+
+  const result = calcGearPairMode3(a, z1, z2);
+  result.ok ? showMode3Result(result) : showErrors(result.errors);
 });
