@@ -46,4 +46,48 @@ function calcGearPair(m, z1, z2, alphaDeg = DEFAULT_ALPHA_DEG) {
   };
 }
 
-export { degToRad, validateMode1Inputs, calcSingleGear, calcGearPair };
+function validateMode2Inputs(m, z1, i) {
+  const errors = [];
+  if (!Number.isFinite(m) || m <= 0)    errors.push("m: 正の数を入力してください");
+  if (!Number.isInteger(z1) || z1 <= 0) errors.push("z1: 正の整数を入力してください");
+  if (!Number.isFinite(i) || i <= 0)    errors.push("i: 正の数を入力してください");
+  return errors;
+}
+
+function calcGearPairMode2(m, z1, i, alphaDeg = DEFAULT_ALPHA_DEG) {
+  const mNum  = Number(m);
+  const z1Num = Number(z1);
+  const iNum  = Number(i);
+
+  const errors = validateMode2Inputs(mNum, z1Num, iNum);
+  if (errors.length > 0) return { ok: false, errors };
+
+  const idealZ2 = z1Num * iNum;
+  const z2Num   = Math.round(idealZ2);
+
+  if (z2Num <= 0) {
+    return { ok: false, errors: ["i が小さすぎます。z2 が 1 以上になる値を入力してください"] };
+  }
+
+  const actualRatio = z2Num / z1Num;
+  const ratioError  = actualRatio - iNum;
+  const gear1 = calcSingleGear(mNum, z1Num, alphaDeg);
+  const gear2 = calcSingleGear(mNum, z2Num, alphaDeg);
+
+  return {
+    ok: true,
+    m: mNum,
+    alphaDeg,
+    idealZ2,
+    z2: z2Num,
+    targetRatio: iNum,
+    actualRatio,
+    ratioError,
+    gear1,
+    gear2,
+    p: Math.PI * mNum,
+    a: mNum * (z1Num + z2Num) / 2,
+  };
+}
+
+export { degToRad, validateMode1Inputs, calcSingleGear, calcGearPair, validateMode2Inputs, calcGearPairMode2 };

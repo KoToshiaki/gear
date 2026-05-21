@@ -11,7 +11,13 @@
   <h1>Gear Pair Calculator</h1>
   <p class="subtitle">平歯車2枚組の基本寸法計算（圧力角 20°）</p>
 
-  <section id="input-section">
+  <nav id="mode-tabs">
+    <button class="mode-tab active" data-mode="1">Mode 1: 歯数指定</button>
+    <button class="mode-tab" data-mode="2">Mode 2: ギア比指定</button>
+  </nav>
+
+  <!-- Mode 1 入力 -->
+  <section id="mode1-panel" class="mode-panel">
     <div class="input-row">
       <label>
         モジュール m
@@ -29,10 +35,31 @@
     </div>
   </section>
 
+  <!-- Mode 2 入力 -->
+  <section id="mode2-panel" class="mode-panel" hidden>
+    <div class="input-row">
+      <label>
+        モジュール m
+        <input type="number" id="m2-m" min="0" step="any" placeholder="例: 2">
+      </label>
+      <label>
+        歯数 z1
+        <input type="number" id="m2-z1" min="1" step="1" placeholder="例: 20">
+      </label>
+      <label>
+        目標ギア比 i
+        <input type="number" id="m2-i" min="0" step="any" placeholder="例: 2">
+      </label>
+      <button id="calc-btn-2">計算</button>
+    </div>
+  </section>
+
+  <!-- エラー表示（共通） -->
   <section id="error-section" hidden>
     <ul id="error-list"></ul>
   </section>
 
+  <!-- Mode 1 結果 -->
   <section id="result-section" hidden>
     <div id="summary">
       <div class="summary-item">
@@ -90,6 +117,85 @@
           <td>mm</td>
           <td id="r-db1"></td>
           <td id="r-db2"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Mode 2 結果 -->
+  <section id="mode2-result-section" hidden>
+    <div id="mode2-summary">
+      <div class="summary-item">
+        <span class="summary-label">理想 z2</span>
+        <span class="summary-value" id="r2-idealZ2"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">丸め後 z2</span>
+        <span class="summary-value" id="r2-z2"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">目標ギア比 i</span>
+        <span class="summary-value" id="r2-targetRatio"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">実際のギア比</span>
+        <span class="summary-value" id="r2-actualRatio"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">ギア比誤差</span>
+        <span class="summary-value" id="r2-ratioError"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">中心距離 a</span>
+        <span class="summary-value" id="r2-a"></span>
+        <span class="summary-unit">mm</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">円ピッチ p</span>
+        <span class="summary-value" id="r2-p"></span>
+        <span class="summary-unit">mm</span>
+      </div>
+    </div>
+
+    <table id="mode2-result-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>単位</th>
+          <th>歯車 1</th>
+          <th>歯車 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>歯数 z</td>
+          <td>—</td>
+          <td id="r2-z1-row"></td>
+          <td id="r2-z2-row"></td>
+        </tr>
+        <tr>
+          <td>ピッチ円直径 d</td>
+          <td>mm</td>
+          <td id="r2-d1"></td>
+          <td id="r2-d2"></td>
+        </tr>
+        <tr>
+          <td>外径 da</td>
+          <td>mm</td>
+          <td id="r2-da1"></td>
+          <td id="r2-da2"></td>
+        </tr>
+        <tr>
+          <td>歯底円直径 df</td>
+          <td>mm</td>
+          <td id="r2-df1"></td>
+          <td id="r2-df2"></td>
+        </tr>
+        <tr>
+          <td>基礎円直径 db</td>
+          <td>mm</td>
+          <td id="r2-db1"></td>
+          <td id="r2-db2"></td>
         </tr>
       </tbody>
     </table>
