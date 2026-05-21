@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gear Pair Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Gear Pair Calculator</h1>
+  <p class="subtitle">平歯車2枚組の基本寸法計算（圧力角 20°）</p>
+
+  <section id="input-section">
+    <div class="input-row">
+      <label>
+        モジュール m
+        <input type="number" id="input-m" min="0" step="any" placeholder="例: 2">
+      </label>
+      <label>
+        歯数 z1
+        <input type="number" id="input-z1" min="1" step="1" placeholder="例: 20">
+      </label>
+      <label>
+        歯数 z2
+        <input type="number" id="input-z2" min="1" step="1" placeholder="例: 40">
+      </label>
+      <button id="calc-btn">計算</button>
+    </div>
+  </section>
+
+  <section id="error-section" hidden>
+    <ul id="error-list"></ul>
+  </section>
+
+  <section id="result-section" hidden>
+    <div id="summary">
+      <div class="summary-item">
+        <span class="summary-label">ギア比 i</span>
+        <span class="summary-value" id="result-i"></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">中心距離 a</span>
+        <span class="summary-value" id="result-a"></span>
+        <span class="summary-unit">mm</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">円ピッチ p</span>
+        <span class="summary-value" id="result-p"></span>
+        <span class="summary-unit">mm</span>
+      </div>
+    </div>
+
+    <table id="result-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>単位</th>
+          <th>歯車 1</th>
+          <th>歯車 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>歯数 z</td>
+          <td>—</td>
+          <td id="r-z1"></td>
+          <td id="r-z2"></td>
+        </tr>
+        <tr>
+          <td>ピッチ円直径 d</td>
+          <td>mm</td>
+          <td id="r-d1"></td>
+          <td id="r-d2"></td>
+        </tr>
+        <tr>
+          <td>外径 da</td>
+          <td>mm</td>
+          <td id="r-da1"></td>
+          <td id="r-da2"></td>
+        </tr>
+        <tr>
+          <td>歯底円直径 df</td>
+          <td>mm</td>
+          <td id="r-df1"></td>
+          <td id="r-df2"></td>
+        </tr>
+        <tr>
+          <td>基礎円直径 db</td>
+          <td>mm</td>
+          <td id="r-db1"></td>
+          <td id="r-db2"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <script type="module" src="ui.js"></script>
+</body>
+</html>

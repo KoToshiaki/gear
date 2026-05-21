@@ -1,0 +1,163 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 680px;
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+  color: #222;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 1.75rem;
+}
+
+/* ---- Input ---- */
+
+#input-section {
+  margin-bottom: 1.25rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  color: #444;
+}
+
+input[type="number"] {
+  width: 110px;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input[type="number"]:focus {
+  outline: 2px solid #3a6ea5;
+  border-color: transparent;
+}
+
+button#calc-btn {
+  padding: 0.45rem 1.4rem;
+  background: #3a6ea5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button#calc-btn:hover {
+  background: #2d5a8e;
+}
+
+/* ---- Error ---- */
+
+#error-section {
+  background: #fff0f0;
+  border: 1px solid #f5a0a0;
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+#error-list {
+  list-style: none;
+  color: #c0392b;
+  font-size: 0.9rem;
+}
+
+#error-list li + li {
+  margin-top: 0.2rem;
+}
+
+/* ---- Summary ---- */
+
+#summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: #f4f8ff;
+  border: 1px solid #ccd9ee;
+  border-radius: 4px;
+}
+
+.summary-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.summary-value {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.summary-unit {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ---- Table ---- */
+
+#result-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.925rem;
+}
+
+#result-table th,
+#result-table td {
+  border: 1px solid #ddd;
+  padding: 0.45rem 0.75rem;
+  text-align: right;
+}
+
+#result-table th {
+  background: #f4f4f4;
+  font-weight: 600;
+  text-align: center;
+}
+
+#result-table td:first-child {
+  text-align: left;
+}
+
+#result-table td:nth-child(2) {
+  text-align: center;
+  color: #888;
+  width: 3rem;
+}
+
+#result-table tbody tr:hover {
+  background: #f9f9f9;
+}
